@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../interfaces/user';
+
+const user: User = {
+   Id: 1,
+   FirstName: 'anyFirstName',
+   LastName: 'anyLastName'
+}
 
 @Component({
   selector: 'app-header',

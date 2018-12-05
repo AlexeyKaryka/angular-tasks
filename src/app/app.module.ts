@@ -10,6 +10,7 @@ import { AppFooterComponent } from './app-footer/app-footer.component';
 import { CourcesItemsComponent } from './app-main/cources-items/cources-items.component';
 import { LogoComponent } from './app-header/logo/logo.component';
 import { CourceItemComponent } from './app-main/cources-items/cource-item/cource-item.component';
+import { BreadcrumbsComponent } from './app-main/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CourceItemComponent } from './app-main/cources-items/cource-item/cource
     AppFooterComponent,
     CourcesItemsComponent,
     LogoComponent,
-    CourceItemComponent
+    CourceItemComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     BrowserModule,
