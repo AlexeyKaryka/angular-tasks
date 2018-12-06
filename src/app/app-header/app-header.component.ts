@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../interfaces/user';
 
-const user: User = {
-   Id: 1,
-   FirstName: 'anyFirstName',
-   LastName: 'anyLastName'
+class user implements User {
+   constructor(Id, FirstName, LastName) {
+      this.Id = Id;
+      this.FirstName = FirstName;
+      this.LastName = LastName;
+   }
+   Id: number;
+   FirstName: string;
+   LastName: string;
 }
 
 @Component({
