@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BreadcrumbsComponent implements OnInit {
 
-  constructor() { }
+   constructor() { }
 
-  ngOnInit() {
-  }
+   breadcrumbsPlaceholder: String;
+
+   ngOnInit() {
+     this.breadcrumbsPlaceholder = 'Courses';
+   }
 
 }

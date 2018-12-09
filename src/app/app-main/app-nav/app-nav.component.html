@@ -1,3 +1,9 @@
-<p>
-  app-nav works!
-</p>
+<div class="navContainer">
+   <form (ngSubmit)="searchCourseHandler()">
+      <input name="search" class="searchCourseInput" placeholder="Text to search" [(ngModel)]="searchCourseInputValue"/>
+      <button class="searchCourseButton" type="submit">Search</button>
+   </form>
+   <div>
+      <button class="addCourseButton">Add course</button>
+   </div>
+</div>

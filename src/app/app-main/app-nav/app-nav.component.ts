@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppNavComponent implements OnInit {
 
-  constructor() { }
+   constructor() { }
 
-  ngOnInit() {
-  }
+   searchInputPlaceholder: String;
+
+   searchCourseInputValue: Object;
+
+   ngOnInit() {
+
+   }
+
+   searchCourseHandler() {
+      console.log(this.searchCourseInputValue);
+   }
 
 }

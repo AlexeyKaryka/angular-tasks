@@ -1,15 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 @Component({
-  selector: 'cource-item',
+  selector: 'app-cource-item',
   templateUrl: './cource-item.component.html',
   styleUrls: ['./cource-item.component.styl']
 })
-export class CourceItemComponent implements OnInit {
+export class CourceItemComponent implements OnInit, OnChanges {
 
-  constructor() { }
+   constructor() { }
 
-  ngOnInit() {
-  }
+   @Input() item: object;
+
+   @Output() emitDeleteItem = new EventEmitter<Number>();
+
+   ngOnChanges(changes) {
+      console.log('onChanges');
+      console.log(changes);
+   }
+
+   ngOnInit() {
+   }
+
+   editHandler() {
+      console.log('Edit!');
+   }
+
+   deleteHandler() {
+      this.emitDeleteItem.emit(this.item.Id);
+   }
 
 }

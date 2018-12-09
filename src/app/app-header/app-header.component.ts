@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../interfaces/user';
 
-class user implements User {
+class PlainUser implements User {
    constructor(Id, FirstName, LastName) {
       this.Id = Id;
       this.FirstName = FirstName;
@@ -21,7 +21,14 @@ export class AppHeaderComponent implements OnInit {
 
   constructor() { }
 
+  userName: String;
+
   ngOnInit() {
+     this.userName = 'User';
+  }
+
+  logoutHandler() {
+     console.log('You\'ve logged out!');
   }
 
 }
