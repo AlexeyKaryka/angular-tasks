@@ -9,24 +9,7 @@ import {
    AfterViewChecked,
    OnDestroy
 } from '@angular/core';
-import { Cource } from 'interfaces/cource';
-import { loremIpsum } from './constants';
-
-class CourcesItem implements Cource {
-   constructor(Id, Title, CreationDate, Duration, Description) {
-      this.Id = Id;
-      this.Title = Title;
-      this.CreationDate = CreationDate;
-      this.Duration = Duration;
-      this.Description = Description;
-   }
-
-   Id: number;
-   Title: string;
-   CreationDate: string;
-   Duration: string;
-   Description: string;
-}
+import { loremIpsum, CourcesItem } from './constants';
 
 
 @Component({
@@ -37,11 +20,11 @@ class CourcesItem implements Cource {
 export class CourcesItemsComponent implements OnInit, OnChanges, DoCheck,
 AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
 
+   private courseItems: CourcesItem[];
+
    constructor() {
       console.log('constructor is called before all of ng hooks!');
    }
-
-   courseItems: CourcesItem[];
 
    ngOnChanges() {
       console.log('onChanges');
@@ -81,11 +64,11 @@ AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestro
       console.log('OnDestroy');
    }
 
-   loadMoreHandler() {
+   private loadMoreHandler() {
      console.log('Load more courses!');
    }
 
-   handleDeleteItem(itemId) {
+   private handleDeleteItem(itemId) {
       console.log(`Item with id ${itemId} will be deleted!`);
    }
 }

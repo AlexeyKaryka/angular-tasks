@@ -1,9 +1,7 @@
-<div class="navContainer">
+<div class="searchContainer">
    <form (ngSubmit)="searchCourseHandler()">
       <input name="search" class="searchCourseInput" placeholder="Text to search" [(ngModel)]="searchCourseInputValue"/>
       <button class="searchCourseButton" type="submit">Search</button>
    </form>
-   <div>
-      <button class="addCourseButton">Add course</button>
-   </div>
+   <button class="addCourseButton">Add course</button>
 </div>

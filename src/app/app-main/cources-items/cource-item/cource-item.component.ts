@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { CourcesItem } from '../constants';
 
 @Component({
   selector: 'app-cource-item',
@@ -9,7 +10,7 @@ export class CourceItemComponent implements OnInit, OnChanges {
 
    constructor() { }
 
-   @Input() item: object;
+   @Input() item: CourcesItem;
 
    @Output() emitDeleteItem = new EventEmitter<Number>();
 
@@ -21,11 +22,11 @@ export class CourceItemComponent implements OnInit, OnChanges {
    ngOnInit() {
    }
 
-   editHandler() {
+   private editHandler() {
       console.log('Edit!');
    }
 
-   deleteHandler() {
+   private deleteHandler() {
       this.emitDeleteItem.emit(this.item.Id);
    }
 

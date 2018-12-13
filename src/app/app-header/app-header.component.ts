@@ -1,16 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../interfaces/user';
+import { PlainUser } from './constants';
 
-class PlainUser implements User {
-   constructor(Id, FirstName, LastName) {
-      this.Id = Id;
-      this.FirstName = FirstName;
-      this.LastName = LastName;
-   }
-   Id: number;
-   FirstName: string;
-   LastName: string;
-}
 
 @Component({
   selector: 'app-header',
@@ -19,16 +9,15 @@ class PlainUser implements User {
 })
 export class AppHeaderComponent implements OnInit {
 
-  constructor() { }
+   private userName: String = 'User';
 
-  userName: String;
+   constructor() { }
 
-  ngOnInit() {
-     this.userName = 'User';
-  }
+   ngOnInit() {
+   }
 
-  logoutHandler() {
+   private logoutHandler() {
      console.log('You\'ve logged out!');
-  }
+   }
 
 }

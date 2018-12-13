@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppMainComponent } from './app-main/app-main.component';
-import { AppNavComponent } from './app-main/app-nav/app-nav.component';
+import { AppCourseSearchComponent } from './app-main/app-course-search/app-course-search.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
 import { CourcesItemsComponent } from './app-main/cources-items/cources-items.component';
 import { LogoComponent } from './app-header/logo/logo.component';
@@ -18,7 +18,7 @@ import { BreadcrumbsComponent } from './app-main/breadcrumbs/breadcrumbs.compone
     AppComponent,
     AppHeaderComponent,
     AppMainComponent,
-    AppNavComponent,
+    AppCourseSearchComponent,
     AppFooterComponent,
     CourcesItemsComponent,
     LogoComponent,
