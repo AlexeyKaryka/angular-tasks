@@ -20,7 +20,7 @@ import { loremIpsum, CourcesItem } from './constants';
 export class CourcesItemsComponent implements OnInit, OnChanges, DoCheck,
 AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
 
-   private courseItems: CourcesItem[];
+   courseItems: CourcesItem[];
 
    constructor() {
       console.log('constructor is called before all of ng hooks!');
