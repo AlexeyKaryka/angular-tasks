@@ -1,11 +1,12 @@
-<!-- <div class="courseItem">{{item | json}}</div> -->
-<article class="courseItem">
+<article appCourceDateIndicator [ngClass]="{courseItem: true, courseItemTopRated: item.TopRated}">
    <div class="mainBlock">
       <div class="metaDataBlock">
-         <div>{{item.Title}}</div>
          <div>
-            <span class="durationItem">{{item.Duration}}</span>
-            <span class="dateItem">{{item.Date}}</span>
+            {{item.Title | uppercase}}
+            <img *ngIf="item.TopRated" class="topRatedIcon" src="assets/star.png"/></div>
+         <div>
+            <span class="durationItem">{{item.Duration | duration}}</span>
+            <span class="dateItem">{{item.CreationDate | date}}</span>
          </div>
       </div>
       <div class="descriptionItem">{{item.Description}}</div>

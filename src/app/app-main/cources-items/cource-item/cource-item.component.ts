@@ -20,6 +20,7 @@ export class CourceItemComponent implements OnInit, OnChanges {
    }
 
    ngOnInit() {
+      console.log(this.item.CreationDate);
    }
 
    private editHandler() {

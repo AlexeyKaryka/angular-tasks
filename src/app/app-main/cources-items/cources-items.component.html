@@ -1,8 +1,13 @@
 <section class="coursesItemsContainer">
-   <ul class="coursesItemsList" >
+   <ul *ngIf="courseItems; else noData" class="coursesItemsList" >
       <li *ngFor="let courseItem of courseItems">
          <app-cource-item [item]="courseItem" (emitDeleteItem)="handleDeleteItem($event)"></app-cource-item>
       </li>
    </ul>
+   <ng-template #noData>
+      <div class="noCoursesBlock">
+         No data. Feel free to add new course
+      </div>
+   </ng-template>
    <button class="loadMoreButton" (click)="loadMoreHandler()">Load more</button>
 </section>
