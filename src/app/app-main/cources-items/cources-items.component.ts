@@ -7,24 +7,23 @@ import {
    AfterContentChecked,
    AfterViewInit,
    AfterViewChecked,
-   OnDestroy
+   OnDestroy,
+   Input
 } from '@angular/core';
-import { loremIpsum, CourcesItem } from './constants';
-import { OrderByPipe } from '../../order-by.pipe';
+import { CourseItem } from '../constants';
 
 
 @Component({
   selector: 'app-cources-items',
   templateUrl: './cources-items.component.html',
   styleUrls: ['./cources-items.component.styl'],
-  providers: [OrderByPipe]
 })
 export class CourcesItemsComponent implements OnInit, OnChanges, DoCheck,
 AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
 
-   courseItems: CourcesItem[];
+   @Input() courseItems: CourseItem[];
 
-   constructor(private orderBy: OrderByPipe) {
+   constructor() {
       console.log('constructor is called before all of ng hooks!');
    }
 
@@ -34,12 +33,6 @@ AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestro
 
    ngOnInit() {
       console.log('OnInit');
-      this.courseItems = this.orderBy.transform([
-         new CourcesItem(1, 'Video course 1', new Date(2018, 3, 11), 15, loremIpsum, false),
-         new CourcesItem(2, 'Video course 2', new Date(2018, 3, 12), 100, loremIpsum, true),
-         new CourcesItem(3, 'Video course 3', new Date(2018, 11, 13), 170, loremIpsum, true),
-         new CourcesItem(4, 'Video course 4', new Date(2018, 3, 14), 120, loremIpsum, false)
-      ]);
    }
 
    ngDoCheck() {

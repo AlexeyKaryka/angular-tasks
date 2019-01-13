@@ -16,7 +16,7 @@ export class DurationPipe implements PipeTransform {
    }
 
    getMinutesRemains(minutes) {
-      return minutes - Math.floor(minutes / 60) * 60;
+      return minutes - this.getHours(minutes) * 60;
    }
 
 }

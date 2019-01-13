@@ -1,9 +1,9 @@
-<article appCourceDateIndicator [ngClass]="{courseItem: true, courseItemTopRated: item.TopRated}">
+<article appCourceDateIndicator [ngClass]="{courseItem: true, courseItemTopRated: item.Rating == 'TopRated'}">
    <div class="mainBlock">
       <div class="metaDataBlock">
          <div>
             {{item.Title | uppercase}}
-            <img *ngIf="item.TopRated" class="topRatedIcon" src="assets/star.png"/></div>
+            <img *ngIf="item.Rating === TopRated" class="topRatedIcon" src="assets/star.png"/></div>
          <div>
             <span class="durationItem">{{item.Duration | duration}}</span>
             <span class="dateItem">{{item.CreationDate | date}}</span>

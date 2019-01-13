@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { CourcesItem } from '../constants';
+import { CourseItem } from '../../constants';
 
 @Component({
   selector: 'app-cource-item',
@@ -10,7 +10,7 @@ export class CourceItemComponent implements OnInit, OnChanges {
 
    constructor() { }
 
-   @Input() item: CourcesItem;
+   @Input() item: CourseItem;
 
    @Output() emitDeleteItem = new EventEmitter<Number>();
 

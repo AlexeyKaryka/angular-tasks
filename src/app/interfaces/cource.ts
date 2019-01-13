@@ -4,5 +4,5 @@ export interface Cource {
   CreationDate: Date;
   Duration: number;
   Description: string;
-  TopRated: boolean;
+  Rating: string;
 }
