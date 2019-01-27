@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { loremIpsum, CourseItem } from './constants';
 import { CoursesService } from '../courses.service';
 
@@ -9,8 +9,11 @@ import { CoursesService } from '../courses.service';
 })
 export class AppMainComponent implements OnInit {
 
-   courseItems: CourseItem[];
-   filteredCourseItems: CourseItem[];
+   @Output() emitGoToAddCoursePage = new EventEmitter<boolean>();
+
+   public courseItems: CourseItem[];
+   public filteredCourseItems: CourseItem[];
+   public isAddCoursePage = false;
 
    constructor(private coursesService: CoursesService) { }
 
@@ -31,6 +34,14 @@ export class AppMainComponent implements OnInit {
       console.log(itemId, 'will be deleted');
       this.coursesService.removeItemById(itemId);
       this.getCourseItems();
+   }
+
+   goToAddCoursePageHandler(goToAddCoursePage) {
+      this.isAddCoursePage = goToAddCoursePage;
+   }
+
+   goToCoursesPageHandler(goToCoursesPage) {
+      this.isAddCoursePage = !goToCoursesPage;
    }
 
 }

@@ -8,11 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AppHeaderComponent implements OnInit {
 
-   @Input() private isUserAuthenticated: boolean;
+   @Input() public isUserAuthenticated: boolean;
 
-   @Input() private logout: Function;
+   @Input() public logout: Function;
 
-   @Input() private userName: String;
+   @Input() public userName: String;
 
    constructor() { }
 

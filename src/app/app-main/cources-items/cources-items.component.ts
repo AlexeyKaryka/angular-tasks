@@ -67,8 +67,15 @@ AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestro
      console.log('Load more courses!');
    }
 
-   private handleDeleteItem(itemId) {
-      console.log(`Item with id ${itemId} will be deleted!`);
-      this.emitDeleteItem.emit(itemId);
+   private handleDeleteItem = ({itemId, itemTitle}) => {
+      const toDelete = confirm(`Are you convinced to delete course "${itemTitle}"?`);
+      if (toDelete) {
+         console.log(`Item with id ${itemId} will be deleted!`);
+         this.emitDeleteItem.emit(itemId);
+      }
+   }
+
+   private editHandler() {
+      console.log('Edit!');
    }
 }

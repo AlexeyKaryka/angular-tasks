@@ -3,7 +3,7 @@
       <div class="metaDataBlock">
          <div>
             {{item.Title | uppercase}}
-            <img *ngIf="item.Rating === TopRated" class="topRatedIcon" src="assets/star.png"/></div>
+            <img *ngIf="item.Rating === 'TopRated'" class="topRatedIcon" src="assets/star.png"/></div>
          <div>
             <span class="durationItem">{{item.Duration | duration}}</span>
             <span class="dateItem">{{item.CreationDate | date}}</span>
@@ -13,6 +13,6 @@
    </div>
    <div class="buttonsBlock">
       <button class="buttonItem" (click)="editHandler()">Edit</button>
-      <button class="buttonItem buttonDelete" (click)="deleteHandler()">Delete</button>
+      <button class="buttonItem buttonDelete" (click)="deleteHandler({itemId: item.Id, itemTitle: item.Title})">Delete</button>
    </div>
 </article>
