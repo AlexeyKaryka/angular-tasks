@@ -16,29 +16,31 @@ import { CourceDateIndicatorDirective } from './directives/cource-date-indicator
 import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterCourseItemsPipe } from './pipes/filter-course-items.pipe';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AppHeaderComponent,
-    AppMainComponent,
-    AppCourseSearchComponent,
-    AppFooterComponent,
-    CourcesItemsComponent,
-    LogoComponent,
-    CourceItemComponent,
-    BreadcrumbsComponent,
-    CourceDateIndicatorDirective,
-    DurationPipe,
-    OrderByPipe,
-    FilterCourseItemsPipe
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+      AppHeaderComponent,
+      AppMainComponent,
+      AppCourseSearchComponent,
+      AppFooterComponent,
+      CourcesItemsComponent,
+      LogoComponent,
+      CourceItemComponent,
+      BreadcrumbsComponent,
+      CourceDateIndicatorDirective,
+      DurationPipe,
+      OrderByPipe,
+      FilterCourseItemsPipe
+   ],
+   imports: [
+      BrowserModule,
+      AppRoutingModule,
+      FormsModule,
+      LoginModule
+   ],
+   providers: [],
+   bootstrap: [AppComponent]
 })
 export class AppModule { }

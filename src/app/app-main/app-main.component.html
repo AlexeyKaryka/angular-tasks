@@ -1,3 +1,6 @@
 <app-breadcrumbs></app-breadcrumbs>
 <app-course-search [courseItems]="courseItems" (emitFilteredCourseItems)="updateFilteredCourseItems($event)"></app-course-search>
-<app-cources-items [courseItems]="filteredCourseItems ? filteredCourseItems : courseItems"></app-cources-items>
+<app-cources-items
+   [courseItems]="filteredCourseItems ? filteredCourseItems : courseItems"
+   (emitDeleteItem)="deleteItem($event)"
+></app-cources-items>
