@@ -1,6 +1,15 @@
-<app-breadcrumbs></app-breadcrumbs>
-<app-course-search [courseItems]="courseItems" (emitFilteredCourseItems)="updateFilteredCourseItems($event)"></app-course-search>
-<app-cources-items
-   [courseItems]="filteredCourseItems ? filteredCourseItems : courseItems"
-   (emitDeleteItem)="deleteItem($event)"
-></app-cources-items>
+<app-add-course *ngIf="isAddCoursePage; else coursesPage" (emitGoToCoursesPage)="goToCoursesPageHandler($event)"></app-add-course>
+<ng-template #coursesPage>
+   <app-breadcrumbs></app-breadcrumbs>
+   <app-course-search
+      (emitGoToAddCoursePage)="goToAddCoursePageHandler($event)"
+      [courseItems]="courseItems"
+      (emitFilteredCourseItems)="updateFilteredCourseItems($event)"
+   >
+   </app-course-search>
+   <app-cources-items
+      [courseItems]="filteredCourseItems ? filteredCourseItems : courseItems"
+      (emitDeleteItem)="deleteItem($event)"
+   >
+   </app-cources-items>
+</ng-template>

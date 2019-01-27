@@ -12,15 +12,16 @@ export class AppCourseSearchComponent implements OnInit {
 
    @Input() courseItems: CourseItem[];
    @Output() emitFilteredCourseItems = new EventEmitter<CourseItem[]>();
+   @Output() emitGoToAddCoursePage = new EventEmitter<boolean>();
 
    constructor(private filterCourseItems: FilterCourseItemsPipe) { }
 
-   private searchCourseInputValue: String;
+   public searchCourseInputValue: String;
 
    ngOnInit() {
    }
 
-   private searchCourseHandler() {
+   public searchCourseHandler() {
       console.log(this.searchCourseInputValue);
       if (this.searchCourseInputValue) {
          const filteredCourseItems = this.filterCourseItems.transform({
@@ -31,6 +32,10 @@ export class AppCourseSearchComponent implements OnInit {
       } else {
          this.emitFilteredCourseItems.emit(this.courseItems);
       }
+   }
+
+   public addCourseHandler() {
+      this.emitGoToAddCoursePage.emit(true);
    }
 
 }

@@ -1,7 +1,7 @@
 <section class="coursesItemsContainer">
    <ul *ngIf="courseItems.length; else noData" class="coursesItemsList" >
       <li *ngFor="let courseItem of courseItems | orderBy">
-         <app-cource-item [item]="courseItem" (emitDeleteItem)="handleDeleteItem($event)"></app-cource-item>
+         <app-cource-item [deleteHandler]="handleDeleteItem" [editHandler]="editHandler" [item]="courseItem"></app-cource-item>
       </li>
       <button class="loadMoreButton" (click)="loadMoreHandler()">Load more</button>
    </ul>

@@ -17,6 +17,7 @@ import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterCourseItemsPipe } from './pipes/filter-course-items.pipe';
 import { LoginModule } from './login/login.module';
+import { AddCourseComponent } from './app-main/add-course/add-course.component';
 
 @NgModule({
    declarations: [
@@ -32,7 +33,8 @@ import { LoginModule } from './login/login.module';
       CourceDateIndicatorDirective,
       DurationPipe,
       OrderByPipe,
-      FilterCourseItemsPipe
+      FilterCourseItemsPipe,
+      AddCourseComponent
    ],
    imports: [
       BrowserModule,
