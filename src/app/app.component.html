@@ -1,9 +1,11 @@
 <div class="mainBlocksContainer">
-   <app-header [logout]="logout" [isUserAuthenticated]="isUserAuthenticated" [userName]="userName"></app-header>
-   <app-login-page [userName]="'NameForLogin'" [login]="login" *ngIf="!isUserAuthenticated; else userIsAuthenticated"></app-login-page>
-   <ng-template #userIsAuthenticated>
-      <router-outlet></router-outlet>
-   </ng-template>
+   <app-header
+      [logout]="logout"
+      [isUserAuthenticated]="isUserAuthenticated"
+      [userName]="userName"
+   ></app-header>
+   <app-breadcrumbs></app-breadcrumbs>
+   <router-outlet></router-outlet>
 </div>
 <div class="footerContainer">
    <app-footer></app-footer>

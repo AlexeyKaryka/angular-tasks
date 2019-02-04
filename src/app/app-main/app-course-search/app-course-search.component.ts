@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { CourseItem } from '../constants';
 import { FilterCourseItemsPipe } from '../../pipes/filter-course-items.pipe';
 
@@ -12,9 +13,8 @@ export class AppCourseSearchComponent implements OnInit {
 
    @Input() courseItems: CourseItem[];
    @Output() emitFilteredCourseItems = new EventEmitter<CourseItem[]>();
-   @Output() emitGoToAddCoursePage = new EventEmitter<boolean>();
 
-   constructor(private filterCourseItems: FilterCourseItemsPipe) { }
+   constructor(private filterCourseItems: FilterCourseItemsPipe, private router: Router) { }
 
    public searchCourseInputValue: String;
 
@@ -35,7 +35,7 @@ export class AppCourseSearchComponent implements OnInit {
    }
 
    public addCourseHandler() {
-      this.emitGoToAddCoursePage.emit(true);
+      this.router.navigate(['courses/new']);
    }
 
 }

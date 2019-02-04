@@ -12,7 +12,7 @@ export class CourceItemComponent implements OnInit, OnChanges {
    constructor() { }
 
    @Input() item: CourseItem;
-   @Input() editHandler: Function;
+   @Input() navigateToCourse: Function;
    @Input() deleteHandler: Function;
 
    ngOnChanges(changes) {
@@ -22,5 +22,9 @@ export class CourceItemComponent implements OnInit, OnChanges {
 
    ngOnInit() {
       console.log(this.item.CreationDate);
+   }
+
+   editHandler() {
+      this.navigateToCourse(this.item.Id);
    }
 }

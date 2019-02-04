@@ -19,11 +19,11 @@ export class CoursesService {
       return this.courseItems;
    }
 
-   createCourse(newCourse) {
+   createCourse(newCourse: CourseItem) {
       this.courseItems.push(newCourse);
    }
 
-   getItemById(itemId): CourseItem {
+   getItemById(itemId: number): CourseItem {
       return this.courseItems.find(item => item.Id === itemId);
    }
 

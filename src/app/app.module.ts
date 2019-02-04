@@ -18,6 +18,8 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterCourseItemsPipe } from './pipes/filter-course-items.pipe';
 import { LoginModule } from './login/login.module';
 import { AddCourseComponent } from './app-main/add-course/add-course.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { EditCourseComponent } from './edit-course/edit-course.component';
 
 @NgModule({
    declarations: [
@@ -34,7 +36,9 @@ import { AddCourseComponent } from './app-main/add-course/add-course.component';
       DurationPipe,
       OrderByPipe,
       FilterCourseItemsPipe,
-      AddCourseComponent
+      AddCourseComponent,
+      NotFoundComponent,
+      EditCourseComponent
    ],
    imports: [
       BrowserModule,

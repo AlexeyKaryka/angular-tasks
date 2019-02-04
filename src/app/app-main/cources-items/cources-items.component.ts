@@ -12,6 +12,7 @@ import {
    Output,
    EventEmitter
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { CourseItem } from '../constants';
 
 
@@ -27,7 +28,7 @@ AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestro
 
    @Input() courseItems: CourseItem[];
 
-   constructor() {
+   constructor(private router: Router) {
       console.log('constructor is called before all of ng hooks!');
    }
 
@@ -75,7 +76,7 @@ AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestro
       }
    }
 
-   private editHandler() {
-      console.log('Edit!');
+   private navigateToCourse = (courseId) => {
+      this.router.navigate([`courses/${courseId}`]);
    }
 }

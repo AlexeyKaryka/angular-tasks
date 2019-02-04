@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthorizationService } from './authorization.service';
 
 @Component({
@@ -11,11 +12,11 @@ export class AppComponent implements OnInit {
    public isUserAuthenticated: boolean;
    public userName: string;
 
-   constructor(private authService: AuthorizationService) {
+   constructor(private authService: AuthorizationService, private router: Router) {
    }
 
    ngOnInit() {
-      this.updateUserMetaData();
+      setInterval(() => { this.updateUserMetaData(); }, 1000);
    }
 
    updateIsUserAuthenticated() {
@@ -33,11 +34,6 @@ export class AppComponent implements OnInit {
 
    logout = () => {
       this.authService.logout();
-      this.updateUserMetaData();
-   }
-
-   login = userName => {
-      this.authService.login(userName);
-      this.updateUserMetaData();
+      this.router.navigate(['login']);
    }
 }

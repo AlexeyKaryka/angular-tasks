@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthorizationService } from '../authorization.service';
 
 @Component({
@@ -8,16 +9,16 @@ import { AuthorizationService } from '../authorization.service';
 })
 export class LoginPageComponent implements OnInit {
 
-   @Input() userName: string;
-   @Input() login: Function;
+   public userName: string;
 
-   constructor(private authService: AuthorizationService) { }
+   constructor(private authService: AuthorizationService, private router: Router) { }
 
    ngOnInit() {
    }
 
-   loginHandler() {
-      this.login(this.userName);
+   loginHandler = () => {
+      this.authService.login(this.userName);
+      this.router.navigate(['courses']);
    }
 
 }

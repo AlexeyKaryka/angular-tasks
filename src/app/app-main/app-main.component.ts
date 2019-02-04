@@ -13,7 +13,6 @@ export class AppMainComponent implements OnInit {
 
    public courseItems: CourseItem[];
    public filteredCourseItems: CourseItem[];
-   public isAddCoursePage = false;
 
    constructor(private coursesService: CoursesService) { }
 
@@ -35,13 +34,4 @@ export class AppMainComponent implements OnInit {
       this.coursesService.removeItemById(itemId);
       this.getCourseItems();
    }
-
-   goToAddCoursePageHandler(goToAddCoursePage) {
-      this.isAddCoursePage = goToAddCoursePage;
-   }
-
-   goToCoursesPageHandler(goToCoursesPage) {
-      this.isAddCoursePage = !goToCoursesPage;
-   }
-
 }
