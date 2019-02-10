@@ -4,22 +4,23 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppHeaderComponent } from './app-header/app-header.component';
-import { AppMainComponent } from './app-main/app-main.component';
-import { AppCourseSearchComponent } from './app-main/app-course-search/app-course-search.component';
-import { AppFooterComponent } from './app-footer/app-footer.component';
-import { CourcesItemsComponent } from './app-main/cources-items/cources-items.component';
-import { LogoComponent } from './app-header/logo/logo.component';
-import { CourceItemComponent } from './app-main/cources-items/cource-item/cource-item.component';
-import { BreadcrumbsComponent } from './app-main/breadcrumbs/breadcrumbs.component';
+import { AppHeaderComponent } from 'components/app-header/app-header.component';
+import { AppMainComponent } from 'components/app-main/app-main.component';
+import { AppCourseSearchComponent } from 'components/app-main/app-course-search/app-course-search.component';
+import { AppFooterComponent } from 'components/app-footer/app-footer.component';
+import { CourcesItemsComponent } from 'components/app-main/cources-items/cources-items.component';
+import { LogoComponent } from 'components/app-header/logo/logo.component';
+import { CourceItemComponent } from 'components/app-main/cources-items/cource-item/cource-item.component';
+import { BreadcrumbsComponent } from 'components/app-main/breadcrumbs/breadcrumbs.component';
+import { AddCourseComponent } from 'components/app-main/add-course/add-course.component';
+import { NotFoundComponent } from 'components/not-found/not-found.component';
+import { EditCourseComponent } from 'components/app-main/edit-course/edit-course.component';
 import { CourceDateIndicatorDirective } from './directives/cource-date-indicator.directive';
 import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterCourseItemsPipe } from './pipes/filter-course-items.pipe';
-import { LoginModule } from './login/login.module';
-import { AddCourseComponent } from './app-main/add-course/add-course.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { EditCourseComponent } from './edit-course/edit-course.component';
+import { LoginModule } from './login-module/login.module';
+
 
 @NgModule({
    declarations: [

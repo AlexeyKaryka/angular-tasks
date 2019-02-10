@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppMainComponent } from './app-main/app-main.component';
-import { AddCourseComponent } from './app-main/add-course/add-course.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { EditCourseComponent } from './edit-course/edit-course.component';
-import { AuthGuard } from './auth-guard';
+import { AppMainComponent } from 'components/app-main/app-main.component';
+import { AddCourseComponent } from 'components/app-main/add-course/add-course.component';
+import { NotFoundComponent } from 'components/not-found/not-found.component';
+import { EditCourseComponent } from 'components/app-main/edit-course/edit-course.component';
+import { LoginPageComponent } from './login-module/components/login-page/login-page.component';
+import { AuthGuard } from './guards/auth-guard';
+import { LoginPageGuard } from './guards/login-page-guard';
 
 const routes: Routes = [
    {
@@ -30,7 +31,8 @@ const routes: Routes = [
    },
    {
       path: 'login',
-      component: LoginPageComponent
+      component: LoginPageComponent,
+      canActivate: [LoginPageGuard]
    },
    {
       path: '**',
