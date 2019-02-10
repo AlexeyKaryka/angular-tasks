@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthorizationService } from './authorization.service';
+import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
+import { AuthorizationService } from './services/authorization.service';
 
 @Component({
   selector: 'app-root',
@@ -11,33 +12,26 @@ export class AppComponent implements OnInit {
    public isUserAuthenticated: boolean;
    public userName: string;
 
-   constructor(private authService: AuthorizationService) {
+   constructor(private authService: AuthorizationService, private router: Router) {
    }
 
    ngOnInit() {
       this.updateUserMetaData();
-   }
-
-   updateIsUserAuthenticated() {
-      this.isUserAuthenticated = this.authService.isAuthenticated();
-   }
-
-   updateUserName() {
-      this.userName = this.authService.getUserInfo();
+      this.router.events.subscribe(event => {
+         if (event instanceof RoutesRecognized && event.url.endsWith('/courses')) {
+            this.updateUserMetaData();
+         }
+      });
    }
 
    updateUserMetaData() {
-      this.updateIsUserAuthenticated();
-      this.updateUserName();
+      this.isUserAuthenticated = this.authService.isAuthenticated();
+      this.userName = this.authService.getUserInfo();
    }
 
    logout = () => {
       this.authService.logout();
       this.updateUserMetaData();
-   }
-
-   login = userName => {
-      this.authService.login(userName);
-      this.updateUserMetaData();
+      this.router.navigate(['login']);
    }
 }
