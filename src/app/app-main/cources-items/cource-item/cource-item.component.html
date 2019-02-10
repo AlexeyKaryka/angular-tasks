@@ -1,1 +1,17 @@
-<div>cource-item</div>
+<!-- <div class="courseItem">{{item | json}}</div> -->
+<article class="courseItem">
+   <div class="mainBlock">
+      <div class="metaDataBlock">
+         <div>{{item.Title}}</div>
+         <div>
+            <span class="durationItem">{{item.Duration}}</span>
+            <span class="dateItem">{{item.Date}}</span>
+         </div>
+      </div>
+      <div class="descriptionItem">{{item.Description}}</div>
+   </div>
+   <div class="buttonsBlock">
+      <button class="buttonItem" (click)="editHandler()">Edit</button>
+      <button class="buttonItem" (click)="deleteHandler()">Delete</button>
+   </div>
+</article>

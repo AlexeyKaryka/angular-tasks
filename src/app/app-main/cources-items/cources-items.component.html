@@ -1,4 +1,8 @@
-<div>
-   <cource-item></cource-item>
-</div>
-
+<section class="coursesItemsContainer">
+   <ul class="coursesItemsList" >
+      <li *ngFor="let courseItem of courseItems">
+         <app-cource-item [item]="courseItem" (emitDeleteItem)="handleDeleteItem($event)"></app-cource-item>
+      </li>
+   </ul>
+   <button class="loadMoreButton" (click)="loadMoreHandler()">Load more</button>
+</section>
