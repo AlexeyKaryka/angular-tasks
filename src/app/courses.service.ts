@@ -33,12 +33,7 @@ export class CoursesService {
       this.courseItems[indexOfItemForUpdate] = updatedItem;
    }
 
-   removeItemById(itemId) {
-      const itemForRemoving = this.getItemById(itemId);
-      console.log(itemForRemoving);
-      const indexOfItemForRemoving = this.courseItems.indexOf(itemForRemoving);
-      console.log(this.courseItems);
-      this.courseItems.splice(indexOfItemForRemoving, 1);
-      console.log(this.courseItems);
+   removeItemById(itemId: number) {
+      this.courseItems = this.courseItems.filter(item => item.Id !== itemId);
    }
 }

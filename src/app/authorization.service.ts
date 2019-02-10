@@ -5,20 +5,19 @@ import { Injectable } from '@angular/core';
 })
 export class AuthorizationService {
 
-   private userLogin = 'PetyaPiter';
    private isUserAuthenticated = false;
 
    constructor() { }
 
    login(userName: string) {
-      this.userLogin = userName;
+      localStorage.setItem('userName', userName);
       this.isUserAuthenticated = true;
       console.log('You\'ve been successfully authenticated!');
    }
 
    logout() {
       this.isUserAuthenticated = false;
-      this.userLogin = '';
+      localStorage.setItem('userName', '');
    }
 
    isAuthenticated(): boolean {
@@ -26,6 +25,6 @@ export class AuthorizationService {
    }
 
    getUserInfo(): string {
-      return this.userLogin;
+      return localStorage.getItem('userName');
    }
 }
