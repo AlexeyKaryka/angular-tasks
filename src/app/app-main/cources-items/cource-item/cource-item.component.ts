@@ -1,18 +1,19 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { CourseItem } from '../../constants';
 
 @Component({
   selector: 'app-cource-item',
   templateUrl: './cource-item.component.html',
-  styleUrls: ['./cource-item.component.styl']
+  styleUrls: ['./cource-item.component.styl'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourceItemComponent implements OnInit, OnChanges {
 
    constructor() { }
 
    @Input() item: CourseItem;
-
-   @Output() emitDeleteItem = new EventEmitter<Number>();
+   @Input() editHandler: Function;
+   @Input() deleteHandler: Function;
 
    ngOnChanges(changes) {
       console.log('onChanges');
@@ -22,16 +23,4 @@ export class CourceItemComponent implements OnInit, OnChanges {
    ngOnInit() {
       console.log(this.item.CreationDate);
    }
-
-   private editHandler() {
-      console.log('Edit!');
-   }
-
-   private deleteHandler() {
-      const toDelete = confirm(`Are you convinced to delete course "${this.item.Title}"?`);
-      if (toDelete) {
-         this.emitDeleteItem.emit(this.item.Id);
-      }
-   }
-
 }

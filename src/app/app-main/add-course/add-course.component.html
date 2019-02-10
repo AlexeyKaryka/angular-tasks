@@ -1,0 +1,23 @@
+<section>
+   <form>
+      <label for="title">Title:</label>
+      <input id="title" [(ngModel)]="title" name="title"/>
+      <br/>
+      <label for="description">Description</label>
+      <textarea id="description" [(ngModel)]="description" name="description"></textarea>
+      <br/>
+      <label for="date">Date:</label>
+      <input id="date" [(ngModel)]="date" name="date"/>
+      <br/>
+      <label for="durationM">Duration:</label>
+      <input id="durationM" [(ngModel)]="durationInMinutes" name="duration"/>
+      <span class="durationHM">{{durationInMinutes ? (durationInMinutes | duration) : null}}</span>
+      <br/>
+      <label for="authors">Authors:</label>
+      <input id="authors" [(ngModel)]="authors" name="authors"/>
+      <div>
+         <button type="button" (click)="saveHandler()">save</button>
+         <button type="button" (click)="cancelHandler()">cancel</button>
+      </div>
+   </form>
+</section>

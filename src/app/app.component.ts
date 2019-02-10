@@ -8,9 +8,8 @@ import { AuthorizationService } from './authorization.service';
 })
 export class AppComponent implements OnInit {
 
-   private isUserAuthenticated: boolean;
-
-   private userName: string;
+   public isUserAuthenticated: boolean;
+   public userName: string;
 
    constructor(private authService: AuthorizationService) {
    }
