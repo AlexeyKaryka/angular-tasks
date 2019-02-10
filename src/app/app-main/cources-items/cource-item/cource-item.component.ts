@@ -28,7 +28,10 @@ export class CourceItemComponent implements OnInit, OnChanges {
    }
 
    private deleteHandler() {
-      this.emitDeleteItem.emit(this.item.Id);
+      const toDelete = confirm(`Are you convinced to delete course "${this.item.Title}"?`);
+      if (toDelete) {
+         this.emitDeleteItem.emit(this.item.Id);
+      }
    }
 
 }

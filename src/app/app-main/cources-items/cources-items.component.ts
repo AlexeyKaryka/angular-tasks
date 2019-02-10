@@ -8,7 +8,9 @@ import {
    AfterViewInit,
    AfterViewChecked,
    OnDestroy,
-   Input
+   Input,
+   Output,
+   EventEmitter
 } from '@angular/core';
 import { CourseItem } from '../constants';
 
@@ -20,6 +22,8 @@ import { CourseItem } from '../constants';
 })
 export class CourcesItemsComponent implements OnInit, OnChanges, DoCheck,
 AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
+
+   @Output() emitDeleteItem = new EventEmitter<number>();
 
    @Input() courseItems: CourseItem[];
 
@@ -65,5 +69,6 @@ AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestro
 
    private handleDeleteItem(itemId) {
       console.log(`Item with id ${itemId} will be deleted!`);
+      this.emitDeleteItem.emit(itemId);
    }
 }

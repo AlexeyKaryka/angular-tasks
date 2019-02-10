@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { PlainUser } from './constants';
+import { Component, OnInit, Input } from '@angular/core';
 
 
 @Component({
@@ -9,7 +8,11 @@ import { PlainUser } from './constants';
 })
 export class AppHeaderComponent implements OnInit {
 
-   private userName: String = 'User';
+   @Input() private isUserAuthenticated: boolean;
+
+   @Input() private logout: Function;
+
+   @Input() private userName: String;
 
    constructor() { }
 
@@ -17,7 +20,8 @@ export class AppHeaderComponent implements OnInit {
    }
 
    private logoutHandler() {
-     console.log('You\'ve logged out!');
+      this.logout();
+      console.log('You\'ve logged out!');
    }
 
 }
