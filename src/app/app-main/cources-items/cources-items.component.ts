@@ -7,20 +7,21 @@ import {
    AfterContentChecked,
    AfterViewInit,
    AfterViewChecked,
-   OnDestroy
+   OnDestroy,
+   Input
 } from '@angular/core';
-import { loremIpsum, CourcesItem } from './constants';
+import { CourseItem } from '../constants';
 
 
 @Component({
   selector: 'app-cources-items',
   templateUrl: './cources-items.component.html',
-  styleUrls: ['./cources-items.component.styl']
+  styleUrls: ['./cources-items.component.styl'],
 })
 export class CourcesItemsComponent implements OnInit, OnChanges, DoCheck,
 AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
 
-   courseItems: CourcesItem[];
+   @Input() courseItems: CourseItem[];
 
    constructor() {
       console.log('constructor is called before all of ng hooks!');
@@ -32,12 +33,6 @@ AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestro
 
    ngOnInit() {
       console.log('OnInit');
-      this.courseItems = [
-         new CourcesItem(1, 'Video course 1', '11.03.2018', '15 minutes', loremIpsum),
-         new CourcesItem(2, 'Video course 2', '12.03.2018', '10 minutes', loremIpsum),
-         new CourcesItem(3, 'Video course 3', '13.03.2018', '17 minutes', loremIpsum),
-         new CourcesItem(4, 'Video course 4', '14.03.2018', '12 minutes', loremIpsum)
-      ];
    }
 
    ngDoCheck() {

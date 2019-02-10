@@ -12,6 +12,10 @@ import { CourcesItemsComponent } from './app-main/cources-items/cources-items.co
 import { LogoComponent } from './app-header/logo/logo.component';
 import { CourceItemComponent } from './app-main/cources-items/cource-item/cource-item.component';
 import { BreadcrumbsComponent } from './app-main/breadcrumbs/breadcrumbs.component';
+import { CourceDateIndicatorDirective } from './directives/cource-date-indicator.directive';
+import { DurationPipe } from './pipes/duration.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { FilterCourseItemsPipe } from './pipes/filter-course-items.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { BreadcrumbsComponent } from './app-main/breadcrumbs/breadcrumbs.compone
     CourcesItemsComponent,
     LogoComponent,
     CourceItemComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    CourceDateIndicatorDirective,
+    DurationPipe,
+    OrderByPipe,
+    FilterCourseItemsPipe
   ],
   imports: [
     BrowserModule,
