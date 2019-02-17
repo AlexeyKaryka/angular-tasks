@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
-import { AuthorizationService } from './services/authorization.service';
+import { AuthorizationService, UserInfo } from './services/authorization.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +26,13 @@ export class AppComponent implements OnInit {
 
    updateUserMetaData() {
       this.isUserAuthenticated = this.authService.isAuthenticated();
-      this.userName = this.authService.getUserInfo();
+      this.authService.getUserInfo().subscribe(
+            (data: UserInfo | null) => {
+               if (data) {
+                  this.userName = `${data.name.first} ${data.name.last}`;
+               }
+            },
+      );
    }
 
    logout = () => {

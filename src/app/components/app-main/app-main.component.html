@@ -6,5 +6,6 @@
 <app-cources-items
    [courseItems]="filteredCourseItems ? filteredCourseItems : courseItems"
    (emitDeleteItem)="deleteItem($event)"
+   [loadMoreHandler]="getMoreCourseItems"
 >
 </app-cources-items>

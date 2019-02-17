@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { TokenInterceptor } from 'http-interceptors/token.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppHeaderComponent } from 'components/app-header/app-header.component';
@@ -43,11 +45,18 @@ import { LoginModule } from './login-module/login.module';
    ],
    imports: [
       BrowserModule,
+      HttpClientModule,
       AppRoutingModule,
       FormsModule,
       LoginModule
    ],
-   providers: [],
+   providers: [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: TokenInterceptor,
+        multi: true
+      }
+   ],
    bootstrap: [AppComponent]
 })
 export class AppModule { }

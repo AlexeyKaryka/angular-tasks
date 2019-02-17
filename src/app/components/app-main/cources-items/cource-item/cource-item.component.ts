@@ -16,12 +16,9 @@ export class CourceItemComponent implements OnInit, OnChanges {
    @Input() deleteHandler: Function;
 
    ngOnChanges(changes) {
-      console.log('onChanges');
-      console.log(changes);
    }
 
    ngOnInit() {
-      console.log(this.item.CreationDate);
    }
 
    editHandler() {

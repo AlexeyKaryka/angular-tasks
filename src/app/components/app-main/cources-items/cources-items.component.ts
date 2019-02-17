@@ -27,6 +27,7 @@ AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestro
    @Output() emitDeleteItem = new EventEmitter<number>();
 
    @Input() courseItems: CourseItem[];
+   @Input() loadMoreHandler: Function;
 
    constructor(private router: Router) {
       console.log('constructor is called before all of ng hooks!');
@@ -62,10 +63,6 @@ AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestro
 
    ngOnDestroy() {
       console.log('OnDestroy');
-   }
-
-   private loadMoreHandler() {
-     console.log('Load more courses!');
    }
 
    private handleDeleteItem = ({itemId, itemTitle}) => {
