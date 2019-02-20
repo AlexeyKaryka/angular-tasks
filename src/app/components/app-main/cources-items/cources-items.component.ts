@@ -21,8 +21,7 @@ import { CourseItem } from '../constants';
   templateUrl: './cources-items.component.html',
   styleUrls: ['./cources-items.component.styl'],
 })
-export class CourcesItemsComponent implements OnInit, OnChanges, DoCheck,
-AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
+export class CourcesItemsComponent {
 
    @Output() emitDeleteItem = new EventEmitter<number>();
 
@@ -30,45 +29,11 @@ AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestro
    @Input() loadMoreHandler: Function;
 
    constructor(private router: Router) {
-      console.log('constructor is called before all of ng hooks!');
-   }
-
-   ngOnChanges() {
-      console.log('onChanges');
-   }
-
-   ngOnInit() {
-      console.log('OnInit');
-   }
-
-   ngDoCheck() {
-      console.log('doCheck');
-   }
-
-   ngAfterContentInit() {
-      console.log('AfterContentInit');
-   }
-
-   ngAfterContentChecked() {
-      console.log('AfterContentChecked');
-   }
-
-   ngAfterViewInit() {
-      console.log('AfterViewInit');
-   }
-
-   ngAfterViewChecked() {
-      console.log('AfterViewChecked');
-   }
-
-   ngOnDestroy() {
-      console.log('OnDestroy');
    }
 
    private handleDeleteItem = ({itemId, itemTitle}) => {
       const toDelete = confirm(`Are you convinced to delete course "${itemTitle}"?`);
       if (toDelete) {
-         console.log(`Item with id ${itemId} will be deleted!`);
          this.emitDeleteItem.emit(itemId);
       }
    }

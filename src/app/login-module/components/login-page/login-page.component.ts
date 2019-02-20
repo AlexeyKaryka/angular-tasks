@@ -18,9 +18,7 @@ export class LoginPageComponent implements OnInit {
    }
 
    loginHandler = () => {
-      this.authService.login({ name: this.userName, password: this.userPassword }).subscribe(() => {
-         this.router.navigate(['courses']);
-      });
+      this.authService.login({ name: this.userName, password: this.userPassword });
    }
 
 }

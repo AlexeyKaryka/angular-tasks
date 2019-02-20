@@ -1,6 +1,6 @@
 <header class="header">
    <app-logo class="logoBlock"></app-logo>
-   <div *ngIf="isUserAuthenticated" class="loginBlock">
+   <div *ngIf="userName" class="loginBlock">
      <span class="usernameText">{{userName}}</span>
      <button class="logoutButton" type="button" (click)="logoutHandler()">Logout</button>
    </div>

@@ -1,0 +1,30 @@
+.container {
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: white;
+}
+
+@keyframes loader {
+   from {
+      transform: rotate(0deg);
+   }
+   to {
+      transform: rotate(360deg);
+   }
+}
+
+.spinner {
+   color: green;
+   border: 10px solid orange;
+   border-top: 10px solid green;
+   border-radius: 50%;
+   height: 50px;
+   width: 50px;
+   animation: loader 2s linear infinite;
+}

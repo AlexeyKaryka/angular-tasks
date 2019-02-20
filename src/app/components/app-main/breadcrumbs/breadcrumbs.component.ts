@@ -20,8 +20,9 @@ export class BreadcrumbsComponent implements OnInit {
    ngOnInit() {
       this.router.events.subscribe(event => {
          if (event instanceof RoutesRecognized && event.state.root.firstChild.params.id) {
-            const { Title } = this.coursesService.getItemById(+event.state.root.firstChild.params.id);
-            this.breadcrumbsRest = `/${Title}`;
+            this.coursesService.getItemById(+event.state.root.firstChild.params.id).subscribe(courseItem => {
+               this.breadcrumbsRest = `/${courseItem.Title}`;
+            });
          } else if (event instanceof RoutesRecognized && event.url.endsWith('/new')) {
             this.breadcrumbsRest = '/Add new course';
          } else if (event instanceof RoutesRecognized) {

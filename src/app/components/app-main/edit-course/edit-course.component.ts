@@ -28,11 +28,12 @@ export class EditCourseComponent extends AddCourseComponent implements OnInit {
    }
 
    updateCourseProps() {
-      const course = this.coursesService.getItemById(this.id);
-      this.title = course.Title;
-      this.description = course.Description;
-      this.date = '' + course.CreationDate;
-      this.durationInMinutes = '' + course.Duration;
+      this.coursesService.getItemById(this.id).subscribe(courseItem => {
+         this.title = courseItem.Title;
+         this.description = courseItem.Description;
+         this.date = '' + courseItem.CreationDate;
+         this.durationInMinutes = '' + courseItem.Duration;
+      });
    }
 
    saveHandler() {
@@ -46,8 +47,9 @@ export class EditCourseComponent extends AddCourseComponent implements OnInit {
             Description: this.description,
             Rating: 'normal'
          }
+      }).subscribe(() => {
+         this.router.navigate(['courses']);
       });
-      this.router.navigate(['courses']);
    }
 
    cancelHandler() {

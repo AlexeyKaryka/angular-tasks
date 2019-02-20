@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
-import { AuthorizationService, UserInfo } from './services/authorization.service';
+import { AuthorizationService, UserInfo } from 'services/authorization.service';
+import { SpinnerService } from 'services/spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -9,35 +10,22 @@ import { AuthorizationService, UserInfo } from './services/authorization.service
 })
 export class AppComponent implements OnInit {
 
-   public isUserAuthenticated: boolean;
-   public userName: string;
+   public isLoadingActive = false;
 
-   constructor(private authService: AuthorizationService, private router: Router) {
+   constructor(
+      private authService: AuthorizationService,
+      private router: Router,
+      private spinnerService: SpinnerService
+   ) {
    }
 
    ngOnInit() {
-      this.updateUserMetaData();
-      this.router.events.subscribe(event => {
-         if (event instanceof RoutesRecognized && event.url.endsWith('/courses')) {
-            this.updateUserMetaData();
-         }
+      this.spinnerService.getLoadingStatusSubscription().subscribe(isLoadingActive => {
+         this.isLoadingActive = isLoadingActive;
       });
-   }
-
-   updateUserMetaData() {
-      this.isUserAuthenticated = this.authService.isAuthenticated();
-      this.authService.getUserInfo().subscribe(
-            (data: UserInfo | null) => {
-               if (data) {
-                  this.userName = `${data.name.first} ${data.name.last}`;
-               }
-            },
-      );
    }
 
    logout = () => {
       this.authService.logout();
-      this.updateUserMetaData();
-      this.router.navigate(['login']);
    }
 }
