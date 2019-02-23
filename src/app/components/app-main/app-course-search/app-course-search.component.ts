@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { CourseItem } from '../constants';
 import { FilterCourseItemsPipe } from 'pipes/filter-course-items.pipe';
+import { CoursesService } from 'services/courses.service';
 
 @Component({
   selector: 'app-course-search',
@@ -14,21 +15,18 @@ export class AppCourseSearchComponent implements OnInit {
    @Input() courseItems: CourseItem[];
    @Output() emitFilteredCourseItems = new EventEmitter<CourseItem[]>();
 
-   constructor(private filterCourseItems: FilterCourseItemsPipe, private router: Router) { }
+   constructor(private filterCourseItems: FilterCourseItemsPipe, private router: Router, private coursesService: CoursesService) { }
 
-   public searchCourseInputValue: String;
+   public searchCourseInputValue: string;
 
    ngOnInit() {
    }
 
    public searchCourseHandler() {
-      console.log(this.searchCourseInputValue);
       if (this.searchCourseInputValue) {
-         const filteredCourseItems = this.filterCourseItems.transform({
-            items: this.courseItems, filteringValue: this.searchCourseInputValue
+         this.coursesService.searchCourses(this.searchCourseInputValue).subscribe(courseItems => {
+            this.emitFilteredCourseItems.emit(courseItems);
          });
-         console.log(filteredCourseItems);
-         this.emitFilteredCourseItems.emit(filteredCourseItems);
       } else {
          this.emitFilteredCourseItems.emit(this.courseItems);
       }

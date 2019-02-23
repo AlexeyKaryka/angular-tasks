@@ -21,19 +21,18 @@ export class AddCourseComponent implements OnInit {
    }
 
    saveHandler() {
-      // We can calculate new course's id if we suppose that every new
-      // course plainly increment previous course's id
-      // First course's id is 1, not 0, so if we have 4 courses, fifth course will have id 5
-      const lastCourseId = this.coursesService.getList().length + 1;
-      this.coursesService.createCourse({
-         Id: lastCourseId + 1,
-         Title: this.title,
-         CreationDate: new Date(this.date),
-         Duration: +this.durationInMinutes,
-         Description: this.description,
-         Rating: 'normal'
+      this.coursesService.getFreeItemId().subscribe(freeItemId => {
+         this.coursesService.createCourse({
+            Id: +freeItemId,
+            Title: this.title,
+            CreationDate: new Date(this.date),
+            Duration: +this.durationInMinutes,
+            Description: this.description,
+            Rating: 'normal'
+         }).subscribe(() => {
+            this.router.navigate(['courses']);
+         });
       });
-      this.router.navigate(['courses']);
    }
 
    cancelHandler() {

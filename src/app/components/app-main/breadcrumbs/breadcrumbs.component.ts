@@ -23,7 +23,6 @@ export class BreadcrumbsComponent implements OnInit {
             const { Title } = this.coursesService.getItemById(+event.state.root.firstChild.params.id);
             this.breadcrumbsRest = `/${Title}`;
          } else if (event instanceof RoutesRecognized && event.url.endsWith('/new')) {
-            console.log('PRIVET');
             this.breadcrumbsRest = '/Add new course';
          } else if (event instanceof RoutesRecognized) {
             this.breadcrumbsRest = '';

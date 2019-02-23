@@ -11,7 +11,7 @@ export class AppMainComponent implements OnInit {
 
    @Output() emitGoToAddCoursePage = new EventEmitter<boolean>();
 
-   public courseItems: CourseItem[];
+   public courseItems: CourseItem[] = [];
    public filteredCourseItems: CourseItem[];
 
    constructor(private coursesService: CoursesService) { }
@@ -21,17 +21,25 @@ export class AppMainComponent implements OnInit {
    }
 
    updateFilteredCourseItems(value) {
-      console.log(value);
       this.filteredCourseItems = value;
    }
 
    getCourseItems() {
-      this.courseItems = this.coursesService.getList();
+      this.coursesService.getInitialList(10).subscribe(courseItems => {
+         this.courseItems = courseItems;
+      });
+   }
+
+   getMoreCourseItems = () => {
+      this.coursesService.expendList().subscribe(courseItems => {
+         console.log(courseItems);
+         this.courseItems = this.courseItems.concat(courseItems);
+      });
    }
 
    deleteItem(itemId) {
-      console.log(itemId, 'will be deleted');
-      this.coursesService.removeItemById(itemId);
-      this.getCourseItems();
+      this.coursesService.removeItemById(itemId).subscribe(() => {
+         this.getCourseItems();
+      });
    }
 }

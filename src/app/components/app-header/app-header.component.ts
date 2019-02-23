@@ -21,7 +21,6 @@ export class AppHeaderComponent implements OnInit {
 
    private logoutHandler() {
       this.logout();
-      console.log('You\'ve logged out!');
    }
 
 }
