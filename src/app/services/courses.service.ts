@@ -95,11 +95,11 @@ export class CoursesService {
          );
    }
 
-   searchCourses(searchValue: string): Observable<CourseItem[]> {
+   searchCourses(textFragment: string): Observable<CourseItem[]> {
       this.spinnerService.startLoading();
       return this.http.get<CourseItemRaw[]>(this.coursesEndpoint, {
          params: {
-            textFragment: searchValue
+            textFragment
          }
        })
          .pipe(
@@ -166,9 +166,6 @@ export class CoursesService {
    }
 
    updateItemById({ itemId, updatedItem }) {
-      // const itemForUpdate = this.getItemById(itemId);
-      // const indexOfItemForUpdate = this.courseItems.indexOf(itemForUpdate);
-      // this.courseItems[indexOfItemForUpdate] = updatedItem;
       this.spinnerService.startLoading();
       return this.http.put<null>(`${this.coursesEndpoint}/${itemId}`, JSON.stringify({
          id: updatedItem.Id,

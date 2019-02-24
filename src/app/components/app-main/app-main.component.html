@@ -1,10 +1,10 @@
 <app-course-search
-   [courseItems]="courseItems"
+   [courseItems]="courseItems | async"
    (emitFilteredCourseItems)="updateFilteredCourseItems($event)"
 >
 </app-course-search>
 <app-cources-items
-   [courseItems]="filteredCourseItems ? filteredCourseItems : courseItems"
+   [courseItems]="(showSearchResults ? filteredCourseItems : courseItems) | async"
    (emitDeleteItem)="deleteItem($event)"
    [loadMoreHandler]="getMoreCourseItems"
 >
