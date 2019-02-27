@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthorizationService, UserInfo } from 'services/authorization.service';
 
 
 @Component({
@@ -8,18 +9,20 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AppHeaderComponent implements OnInit {
 
-   @Input() public isUserAuthenticated: boolean;
-
    @Input() public logout: Function;
 
-   @Input() public userName: String;
+   public userName: String;
 
-   constructor() { }
+   constructor(private authService: AuthorizationService) { }
 
    ngOnInit() {
+      this.authService.userInfoUpdates().subscribe((data: UserInfo | null) => {
+         this.userName = data ? `${data.name.first} ${data.name.last}` : '';
+      });
    }
 
    private logoutHandler() {
+      this.userName = '';
       this.logout();
    }
 

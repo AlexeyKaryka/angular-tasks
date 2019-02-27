@@ -32,7 +32,6 @@ export class AppMainComponent implements OnInit {
 
    getMoreCourseItems = () => {
       this.coursesService.expendList().subscribe(courseItems => {
-         console.log(courseItems);
          this.courseItems = this.courseItems.concat(courseItems);
       });
    }

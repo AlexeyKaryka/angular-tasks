@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Observable, Subject, throwError, of, defer, merge } from 'rxjs';
+import { catchError, tap, map, mergeMap, switchMap } from 'rxjs/operators';
 import { User } from 'interfaces/user';
+import { SpinnerService } from 'services/spinner.service';
 
 interface LoginData {
    name: string;
@@ -33,37 +35,68 @@ const userInfoEndpoint = 'http://localhost:3004/auth/userInfo';
 })
 export class AuthorizationService {
 
-   constructor(private http: HttpClient) { }
+   private userInfoSubject: Subject<UserInfo | null>;
+   private userInfoObservable: Observable<UserInfo | null>;
+
+   constructor(
+      private http: HttpClient,
+      private router: Router,
+      private spinnerService: SpinnerService
+   ) {
+      this.userInfoSubject = new Subject();
+      this.userInfoObservable = merge(
+         defer(() => this.getUserInfo()),
+         this.userInfoSubject
+      );
+   }
 
    login(userData: LoginData) {
-      console.log(userData.name, userData.password);
-      return this.http.post<DataWithToken>(loginEndpoint, JSON.stringify({ login: userData.name, password: userData.password }))
+      this.spinnerService.startLoading();
+      this.http.post<DataWithToken>(loginEndpoint, JSON.stringify({ login: userData.name, password: userData.password }))
          .pipe(
-            tap((data: DataWithToken) => {
-               localStorage.setItem(userToken, data.token);
-            }),
             catchError((error) => {
                console.error(error);
                return throwError(error);
-            })
-         );
+            }),
+            tap((data: DataWithToken) => {
+               localStorage.setItem(userToken, data.token);
+               this.router.navigate(['courses']);
+               this.spinnerService.resolveLoading();
+            }),
+            switchMap(() => this.getUserInfo().pipe(
+               tap(userInfo => {
+                  this.userInfoSubject.next(userInfo);
+               })
+            )),
+         )
+         .subscribe();
    }
 
    logout() {
       localStorage.removeItem(userToken);
+      this.router.navigate(['login']);
+      this.userInfoSubject.next(null);
    }
 
-   isAuthenticated(): boolean {
-      return !!localStorage.getItem(userToken);
+   userInfoUpdates() {
+      return this.userInfoObservable;
+   }
+
+   isAuthenticated(): Observable<boolean> {
+      return this.getUserInfo().pipe(
+         map(userInfoResponse => !!userInfoResponse)
+      );
    }
 
    getUserInfo(): Observable<UserInfo | null> {
       return localStorage.getItem(userToken)
          ? this.http.post<UserInfo>(userInfoEndpoint, null)
-         .pipe(catchError((error) => {
-            console.error(error);
-            return throwError(error);
-         }))
+         .pipe(
+            catchError((error) => {
+               console.error(error);
+               return null;
+            })
+         )
          : of(null);
    }
 }

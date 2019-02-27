@@ -1,8 +1,6 @@
 <div class="mainBlocksContainer">
    <app-header
       [logout]="logout"
-      [isUserAuthenticated]="isUserAuthenticated"
-      [userName]="userName"
    >
    </app-header>
    <app-breadcrumbs></app-breadcrumbs>
@@ -11,4 +9,4 @@
 <div class="footerContainer">
    <app-footer></app-footer>
 </div>
-
+<app-loader *ngIf="isLoadingActive"></app-loader>

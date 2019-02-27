@@ -17,6 +17,7 @@ import { BreadcrumbsComponent } from 'components/app-main/breadcrumbs/breadcrumb
 import { AddCourseComponent } from 'components/app-main/add-course/add-course.component';
 import { NotFoundComponent } from 'components/not-found/not-found.component';
 import { EditCourseComponent } from 'components/app-main/edit-course/edit-course.component';
+import { LoaderComponent } from './components/loader/loader.component';
 import { CourceDateIndicatorDirective } from './directives/cource-date-indicator.directive';
 import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
@@ -41,7 +42,8 @@ import { LoginModule } from './login-module/login.module';
       FilterCourseItemsPipe,
       AddCourseComponent,
       NotFoundComponent,
-      EditCourseComponent
+      EditCourseComponent,
+      LoaderComponent
    ],
    imports: [
       BrowserModule,
