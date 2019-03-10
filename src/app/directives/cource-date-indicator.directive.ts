@@ -15,7 +15,7 @@ export class CourceDateIndicatorDirective implements OnInit {
    getTimeDiff() {
       const currentDate = new Date();
       const creationDate = this.containerRef['_view'].component.item.CreationDate;
-      return creationDate.getTime() - currentDate.getTime();
+      return new Date(creationDate).getTime() - new Date(currentDate).getTime();
    }
 
    getDaysDiff(timeDiff) {

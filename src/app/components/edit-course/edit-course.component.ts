@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CoursesService } from 'services/courses.service';
 import { AddCourseComponent } from '../add-course/add-course.component';
-import { State } from 'ngrx/reducers';
+import { State } from 'interfaces/ngrx';
 import { CourseItem } from '../app-main/constants';
 
 @Component({
@@ -36,10 +36,11 @@ export class EditCourseComponent extends AddCourseComponent implements OnInit {
 
    updateCourseProps() {
       this.editingCourseItem.subscribe(courseItem => {
-         this.title = courseItem.Title;
-         this.description = courseItem.Description;
-         this.date = '' + courseItem.CreationDate;
-         this.durationInMinutes = '' + courseItem.Duration;
+         this.courseForm.controls.title.setValue(courseItem.Title);
+         this.courseForm.controls.description.setValue(courseItem.Description);
+         this.courseForm.controls.date.setValue('' + courseItem.CreationDate);
+         this.courseForm.controls.durationInMinutes.setValue('' + courseItem.Duration);
+         this.courseForm.controls.authors.setValue(courseItem.Authors);
       });
    }
 
@@ -48,19 +49,15 @@ export class EditCourseComponent extends AddCourseComponent implements OnInit {
          itemId: this.id,
          updatedItem: {
             Id: this.id,
-            Title: this.title,
-            CreationDate: new Date(this.date),
-            Duration: +this.durationInMinutes,
-            Description: this.description,
-            Rating: 'normal'
+            Title: this.courseForm.controls.title.value,
+            CreationDate: this.courseForm.controls.date.value,
+            Duration: +this.courseForm.controls.durationInMinutes.value,
+            Description: this.courseForm.controls.description.value,
+            Rating: 'normal',
+            Authors: this.courseForm.controls.authors.value
          }
       }).subscribe(() => {
          this.router.navigate(['courses']);
       });
    }
-
-   cancelHandler() {
-      this.router.navigate(['courses']);
-   }
-
 }

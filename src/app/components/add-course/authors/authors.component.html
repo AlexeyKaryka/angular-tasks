@@ -1,0 +1,20 @@
+<div class="authorsContainer">
+   <label for="authors">Authors:</label>
+   <input
+      id="authors"
+      list="authorsFromServerList"
+      [(ngModel)]="authorsInputValue"
+      (keyup)="authorsOnChange()"
+   />
+   <datalist id="authorsFromServerList">
+      <option *ngFor="let author of authorsFromServer" value="{{author}}">
+   </datalist>
+   <div class="authorsTagsContainer">
+      <div class="authorTag" *ngFor="let author of authors">
+         {{author}}
+         <img (click)="removeAuthor(author)" class="cross" src="assets/cross.png"/>
+      </div>
+   </div>
+</div>
+
+

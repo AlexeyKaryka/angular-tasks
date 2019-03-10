@@ -1,4 +1,9 @@
-.addCourseForm {
+.addCourseForm,
+.titleBlock,
+.descriptionBlock,
+.dateBlock,
+.durationBlock,
+.auhtorsBlock {
    display: flex;
    flex-direction: column;
    justify-content: space-between;
@@ -10,4 +15,13 @@
    justify-content: space-around;
    width: 140px;
    margin-top: 10px;
+}
+
+.error {
+   border: 1px solid red;
+   border-radius: 2px;
+}
+
+.errorText {
+   color: red;
 }

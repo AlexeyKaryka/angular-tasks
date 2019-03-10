@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { TokenInterceptor } from 'http-interceptors/token.interceptor';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +29,9 @@ import { FilterCourseItemsPipe } from './pipes/filter-course-items.pipe';
 import { LoginModule } from './login-module/login.module';
 import { userNameReducer, courseItemsReducer, foundItemsReducer } from 'ngrx/reducers';
 import { Effects } from 'ngrx/effects';
+import { DateComponent } from './components/add-course/date/date.component';
+import { DurationComponent } from './components/add-course/duration/duration.component';
+import { AuthorsComponent } from './components/add-course/authors/authors.component';
 
 
 @NgModule({
@@ -48,7 +52,10 @@ import { Effects } from 'ngrx/effects';
       AddCourseComponent,
       NotFoundComponent,
       EditCourseComponent,
-      LoaderComponent
+      LoaderComponent,
+      DateComponent,
+      DurationComponent,
+      AuthorsComponent
    ],
    imports: [
       StoreModule.forRoot({
@@ -60,6 +67,7 @@ import { Effects } from 'ngrx/effects';
       EffectsModule.forRoot([Effects]),
       BrowserModule,
       HttpClientModule,
+      ReactiveFormsModule,
       AppRoutingModule,
       FormsModule,
       LoginModule

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
-import { AuthorizationService, UserInfo } from 'services/authorization.service';
+import { AuthorizationService } from 'services/authorization.service';
 import { SpinnerService } from 'services/spinner.service';
+import { UserInfo } from 'interfaces/auth';
 
 @Component({
   selector: 'app-root',

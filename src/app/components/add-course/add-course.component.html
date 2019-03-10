@@ -1,18 +1,30 @@
 <section>
-   <form class="addCourseForm">
-      <label for="title">Title:</label>
-      <input id="title" [(ngModel)]="title" name="title"/>
-      <label for="description">Description</label>
-      <textarea id="description" [(ngModel)]="description" name="description"></textarea>
-      <label for="date">Date:</label>
-      <input id="date" [(ngModel)]="date" name="date"/>
-      <label for="durationM">Duration:</label>
-      <input id="durationM" [(ngModel)]="durationInMinutes" name="duration"/>
-      <span class="durationHM">{{durationInMinutes ? (durationInMinutes | duration) : null}}</span>
-      <label for="authors">Authors:</label>
-      <input id="authors" [(ngModel)]="authors" name="authors"/>
+   <form class="addCourseForm" [formGroup]="courseForm" (ngSubmit)="saveHandler()">
+      <div class="titleBlock" [ngClass]="{error: !!getFormFieldErrors('title', 'maxlength')}">
+         <div class="errorText" *ngIf="!!getFormFieldErrors('title', 'maxlength')">Max length was exceeded!</div>
+         <label for="title">Title:</label>
+         <input id="title" name="title" formControlName="title"/>
+      </div>
+      <div class="descriptionBlock" [ngClass]="{error: !!getFormFieldErrors('description', 'maxlength')}">
+         <div class="errorText" *ngIf="!!getFormFieldErrors('description', 'maxlength')">Max length was exceeded!</div>
+         <label for="description">Description</label>
+         <textarea id="description" name="description" formControlName="description"></textarea>
+      </div>
+      <div class="dateBlock" [ngClass]="{error: !!getFormFieldErrors('date', 'valid')}">
+         <div class="errorText" *ngIf="!!getFormFieldErrors('date', 'valid')">Date must be dd.mm.yyyy format!</div>
+         <app-date formControlName="date"></app-date>
+      </div>
+      <div class="durationBlock" [ngClass]="{error: !!getFormFieldErrors('durationInMinutes', 'valid')}">
+         <div class="errorText" *ngIf="!!getFormFieldErrors('durationInMinutes', 'valid')">Duration must be number!</div>
+         <app-duration formControlName="durationInMinutes"></app-duration>
+         <span class="durationHM">{{courseForm.controls.durationInMinutes.value ? (courseForm.controls.durationInMinutes.value | duration) : null}}</span>
+      </div>
+      <div class="auhtorsBlock" [ngClass]="{error: !!getFormFieldErrors('authors', 'valid')}">
+         <div class="errorText" *ngIf="!!getFormFieldErrors('authors', 'valid')">Must be at least one author!</div>
+         <app-authors formControlName="authors"></app-authors>
+      </div>
       <div class="buttonsBlock">
-         <button type="button" (click)="saveHandler()">save</button>
+         <button [disabled]="courseForm.invalid">save</button>
          <button type="button" (click)="cancelHandler()">cancel</button>
       </div>
    </form>

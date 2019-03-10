@@ -4,30 +4,12 @@ import { Router } from '@angular/router';
 import { Observable, Subject, throwError, of, defer, merge } from 'rxjs';
 import { catchError, tap, map, mergeMap, switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { State } from 'ngrx/reducers';
+import { State } from 'interfaces/ngrx';
 import { UpdateUserName, ResetUserName } from 'ngrx/actions';
 import { User } from 'interfaces/user';
 import { SpinnerService } from 'services/spinner.service';
+import { LoginData, DataWithToken, UserInfo } from 'interfaces/auth';
 
-interface LoginData {
-   name: string;
-   password: string;
-}
-
-interface DataWithToken {
-   token: string;
-}
-
-export interface UserInfo {
-   id: string;
-   fakeToken: string;
-   name: {
-      first: string;
-      last: string;
-   };
-   login: string;
-   password: string;
-}
 
 export const userToken = 'userToken';
 const loginEndpoint = 'http://localhost:3004/auth/login';
