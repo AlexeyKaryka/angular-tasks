@@ -1,4 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { State } from 'ngrx/reducers';
+import { GetInitialUserName } from 'ngrx/actions';
 import { AuthorizationService, UserInfo } from 'services/authorization.service';
 
 
@@ -11,19 +15,14 @@ export class AppHeaderComponent implements OnInit {
 
    @Input() public logout: Function;
 
-   public userName: String;
+   public userName$: Observable<string>;
 
-   constructor(private authService: AuthorizationService) { }
-
-   ngOnInit() {
-      this.authService.userInfoUpdates().subscribe((data: UserInfo | null) => {
-         this.userName = data ? `${data.name.first} ${data.name.last}` : '';
-      });
+   constructor(private authService: AuthorizationService, private store$: Store<State>) {
+      this.userName$ = store$.select('userName');
    }
 
-   private logoutHandler() {
-      this.userName = '';
-      this.logout();
+   ngOnInit() {
+      this.store$.dispatch(new GetInitialUserName());
    }
 
 }

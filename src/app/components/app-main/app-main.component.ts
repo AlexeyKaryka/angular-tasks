@@ -1,4 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { State } from 'ngrx/reducers';
+import { AddCourseItems, ResetCourseItems, ChangeSearchResults } from 'ngrx/actions';
 import { loremIpsum, CourseItem } from './constants';
 import { CoursesService } from 'services/courses.service';
 
@@ -11,28 +15,33 @@ export class AppMainComponent implements OnInit {
 
    @Output() emitGoToAddCoursePage = new EventEmitter<boolean>();
 
-   public courseItems: CourseItem[] = [];
-   public filteredCourseItems: CourseItem[];
+   public courseItems: Observable<CourseItem[]>;
+   public filteredCourseItems: Observable<CourseItem[]>;
+   public showSearchResults = false;
 
-   constructor(private coursesService: CoursesService) { }
+   constructor(private coursesService: CoursesService, private store$: Store<State>) {
+      this.courseItems = this.store$.select('courseItems');
+      this.filteredCourseItems = this.store$.select('foundItems');
+   }
 
    ngOnInit() {
       this.getCourseItems();
    }
 
    updateFilteredCourseItems(value) {
-      this.filteredCourseItems = value;
+      this.showSearchResults = true;
+      this.store$.dispatch(new ChangeSearchResults(value));
    }
 
    getCourseItems() {
       this.coursesService.getInitialList(10).subscribe(courseItems => {
-         this.courseItems = courseItems;
+         this.store$.dispatch(new ResetCourseItems(courseItems));
       });
    }
 
    getMoreCourseItems = () => {
       this.coursesService.expendList().subscribe(courseItems => {
-         this.courseItems = this.courseItems.concat(courseItems);
+         this.store$.dispatch(new AddCourseItems(courseItems));
       });
    }
 

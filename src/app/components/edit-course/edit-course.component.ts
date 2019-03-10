@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { CoursesService } from 'services/courses.service';
 import { AddCourseComponent } from '../add-course/add-course.component';
+import { State } from 'ngrx/reducers';
+import { CourseItem } from '../app-main/constants';
 
 @Component({
   selector: 'app-edit-course',
@@ -11,11 +15,13 @@ import { AddCourseComponent } from '../add-course/add-course.component';
 export class EditCourseComponent extends AddCourseComponent implements OnInit {
 
    private id: number;
+   private editingCourseItem: Observable<CourseItem>;
 
    constructor(
       protected router: Router,
       protected coursesService: CoursesService,
-      private activatedRoute: ActivatedRoute
+      private activatedRoute: ActivatedRoute,
+      private store$: Store<State>
    ) {
       super(router, coursesService);
     }
@@ -23,12 +29,13 @@ export class EditCourseComponent extends AddCourseComponent implements OnInit {
    ngOnInit() {
       this.activatedRoute.params.subscribe(params => {
          this.id = +params.id;
+         this.editingCourseItem = this.store$.select(state => state.courseItems.find(item => item.Id === this.id));
          this.updateCourseProps();
       });
    }
 
    updateCourseProps() {
-      this.coursesService.getItemById(this.id).subscribe(courseItem => {
+      this.editingCourseItem.subscribe(courseItem => {
          this.title = courseItem.Title;
          this.description = courseItem.Description;
          this.date = '' + courseItem.CreationDate;

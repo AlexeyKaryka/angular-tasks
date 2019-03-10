@@ -3,6 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, Subject, throwError, of, defer, merge } from 'rxjs';
 import { catchError, tap, map, mergeMap, switchMap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { State } from 'ngrx/reducers';
+import { UpdateUserName, ResetUserName } from 'ngrx/actions';
 import { User } from 'interfaces/user';
 import { SpinnerService } from 'services/spinner.service';
 
@@ -35,19 +38,16 @@ const userInfoEndpoint = 'http://localhost:3004/auth/userInfo';
 })
 export class AuthorizationService {
 
-   private userInfoSubject: Subject<UserInfo | null>;
-   private userInfoObservable: Observable<UserInfo | null>;
-
    constructor(
       private http: HttpClient,
       private router: Router,
-      private spinnerService: SpinnerService
+      private spinnerService: SpinnerService,
+      private store$: Store<State>
    ) {
-      this.userInfoSubject = new Subject();
-      this.userInfoObservable = merge(
-         defer(() => this.getUserInfo()),
-         this.userInfoSubject
-      );
+   }
+
+   getUserName = userInfo => {
+      return `${userInfo.name.first} ${userInfo.name.last}`;
    }
 
    login(userData: LoginData) {
@@ -65,7 +65,7 @@ export class AuthorizationService {
             }),
             switchMap(() => this.getUserInfo().pipe(
                tap(userInfo => {
-                  this.userInfoSubject.next(userInfo);
+                  this.store$.dispatch(new UpdateUserName(userInfo ? this.getUserName(userInfo) : ''));
                })
             )),
          )
@@ -75,11 +75,7 @@ export class AuthorizationService {
    logout() {
       localStorage.removeItem(userToken);
       this.router.navigate(['login']);
-      this.userInfoSubject.next(null);
-   }
-
-   userInfoUpdates() {
-      return this.userInfoObservable;
+      this.store$.dispatch(new ResetUserName());
    }
 
    isAuthenticated(): Observable<boolean> {
