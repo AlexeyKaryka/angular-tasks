@@ -5,22 +5,9 @@ import { catchError, map, tap, mapTo } from 'rxjs/operators';
 import { CourseItem, loremIpsum } from 'components/app-main/constants';
 import { throwError } from 'rxjs';
 import { SpinnerService } from 'services/spinner.service';
+import { CourseItemRaw } from 'interfaces/cource';
 
-
-interface AuthorRaw {
-   id: number;
-   firstName: string;
-   lastName: string;
-}
-interface CourseItemRaw {
-   id: number;
-   name: string;
-   description: string;
-   isTopRated: boolean;
-   date: string;
-   authors: AuthorRaw[];
-   length: number;
-}
+const coursesEndpoint = 'http://localhost:3004/courses';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +16,6 @@ export class CoursesService {
 
    private countPerChunk: number;
    private lastFetchedCourseNumber: number;
-   private coursesEndpoint = 'http://localhost:3004/courses';
 
    constructor(private http: HttpClient, private spinnerService: SpinnerService) { }
 
@@ -43,10 +29,11 @@ export class CoursesService {
       new CourseItem(
          courseItemRaw.id,
          courseItemRaw.name,
-         new Date(courseItemRaw.date),
+         courseItemRaw.date,
          courseItemRaw.length,
          courseItemRaw.description,
-         courseItemRaw.isTopRated ? 'TopRated' : 'Normal'
+         courseItemRaw.isTopRated ? 'TopRated' : 'Normal',
+         courseItemRaw.authors
       )
 
    mapRawCourseItemsToValid = courseItemsRaw =>
@@ -55,7 +42,7 @@ export class CoursesService {
    getInitialList(countPerChunk): Observable<CourseItem[]> {
       this.countPerChunk = countPerChunk;
       this.spinnerService.startLoading();
-      return this.http.get<CourseItemRaw[]>(this.coursesEndpoint, {
+      return this.http.get<CourseItemRaw[]>(coursesEndpoint, {
          params: {
            start: '0',
            count: '' + this.countPerChunk
@@ -76,7 +63,7 @@ export class CoursesService {
 
    expendList(): Observable<CourseItem[]> {
       this.spinnerService.startLoading();
-      return this.http.get<CourseItemRaw[]>(this.coursesEndpoint, {
+      return this.http.get<CourseItemRaw[]>(coursesEndpoint, {
          params: {
            start: '' + (this.lastFetchedCourseNumber + 1),
            count: '' + this.countPerChunk
@@ -97,7 +84,7 @@ export class CoursesService {
 
    searchCourses(textFragment: string): Observable<CourseItem[]> {
       this.spinnerService.startLoading();
-      return this.http.get<CourseItemRaw[]>(this.coursesEndpoint, {
+      return this.http.get<CourseItemRaw[]>(coursesEndpoint, {
          params: {
             textFragment
          }
@@ -116,12 +103,13 @@ export class CoursesService {
 
    createCourse(newCourse: CourseItem) {
       this.spinnerService.startLoading();
-      return this.http.post<null>(this.coursesEndpoint, JSON.stringify({
+      return this.http.post<null>(coursesEndpoint, JSON.stringify({
          id: newCourse.Id,
          name: newCourse.Title,
          description: newCourse.Description,
          isTopRated: newCourse.Rating === 'TopRated',
          date: '' + newCourse.CreationDate,
+         authors: newCourse.Authors,
          length: newCourse.Duration
        }))
          .pipe(
@@ -137,7 +125,7 @@ export class CoursesService {
 
    getFreeItemId() {
       this.spinnerService.startLoading();
-      return this.http.get<number>(this.coursesEndpoint)
+      return this.http.get<number>(coursesEndpoint)
          .pipe(
             catchError(error => {
                console.error(error);
@@ -152,7 +140,7 @@ export class CoursesService {
 
    getItemById(itemId: number) {
       this.spinnerService.startLoading();
-      return this.http.get<CourseItemRaw>(`${this.coursesEndpoint}/${itemId}`)
+      return this.http.get<CourseItemRaw>(`${coursesEndpoint}/${itemId}`)
          .pipe(
             catchError(error => {
                console.error(error);
@@ -167,13 +155,14 @@ export class CoursesService {
 
    updateItemById({ itemId, updatedItem }) {
       this.spinnerService.startLoading();
-      return this.http.put<null>(`${this.coursesEndpoint}/${itemId}`, JSON.stringify({
+      return this.http.put<null>(`${coursesEndpoint}/${itemId}`, JSON.stringify({
          id: updatedItem.Id,
          name: updatedItem.Title,
          description: updatedItem.Description,
          isTopRated: updatedItem.Rating === 'TopRated',
          date: '' + updatedItem.CreationDate,
-         length: updatedItem.Duration
+         length: updatedItem.Duration,
+         authors: updatedItem.Authors
        }))
          .pipe(
             catchError(error => {
@@ -188,7 +177,7 @@ export class CoursesService {
 
    removeItemById(itemId: number) {
       this.spinnerService.startLoading();
-      return this.http.delete<null>(`${this.coursesEndpoint}/${itemId}`)
+      return this.http.delete<null>(`${coursesEndpoint}/${itemId}`)
          .pipe(
             catchError(error => {
                console.error(error);

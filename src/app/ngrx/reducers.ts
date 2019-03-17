@@ -1,12 +1,7 @@
-import { UserInfo } from 'services/authorization.service';
-import { UPDATE_USER_NAME, RESET_USER_NAME, ADD_COURSE_ITEMS, Action, RESET_COURSE_ITEMS, CHANGE_SEARCH_RESULTS } from './actions';
+import { UPDATE_USER_NAME, RESET_USER_NAME, ADD_COURSE_ITEMS, RESET_COURSE_ITEMS, CHANGE_SEARCH_RESULTS } from './actions';
 import { CourseItem } from 'components/app-main/constants';
-
-export interface State {
-   userName: string;
-   courseItems: CourseItem[];
-   foundItems: CourseItem[];
-}
+import { State, Action } from 'interfaces/ngrx';
+import { UserInfo } from 'interfaces/auth';
 
 export const userNameReducer = (state: string = '', action: Action) => {
    switch (action.type) {

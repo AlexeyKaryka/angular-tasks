@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { State } from 'ngrx/reducers';
+import { State } from 'interfaces/ngrx';
+import { UserInfo } from 'interfaces/auth';
 import { GetInitialUserName } from 'ngrx/actions';
-import { AuthorizationService, UserInfo } from 'services/authorization.service';
+import { AuthorizationService } from 'services/authorization.service';
 
 
 @Component({

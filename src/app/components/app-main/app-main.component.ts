@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { State } from 'ngrx/reducers';
+import { State } from 'interfaces/ngrx';
 import { AddCourseItems, ResetCourseItems, ChangeSearchResults } from 'ngrx/actions';
 import { loremIpsum, CourseItem } from './constants';
 import { CoursesService } from 'services/courses.service';

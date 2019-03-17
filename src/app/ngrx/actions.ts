@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CourseItem } from 'components/app-main/constants';
+import { Action, IdleAction } from 'interfaces/ngrx';
 
 export const UPDATE_USER_NAME = 'UPDATE_USER_NAME';
 export const RESET_USER_NAME = 'RESET_USER_NAME';
@@ -8,14 +9,6 @@ export const ADD_COURSE_ITEMS = 'ADD_COURSE_ITEMS';
 export const RESET_COURSE_ITEMS = 'RESET_COURSE_ITEMS';
 export const CHANGE_SEARCH_RESULTS = 'CHANGE_SEARCH_RESULTS';
 
-export interface Action {
-   type: string;
-   payload: any;
-}
-
-export interface IdleAction {
-   type: string;
-}
 
 export class UpdateUserName implements Action {
    readonly type = UPDATE_USER_NAME;
