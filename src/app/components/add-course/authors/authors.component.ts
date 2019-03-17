@@ -34,7 +34,8 @@ export class AuthorsComponent implements OnInit, ControlValueAccessor {
    }
 
    validate(control: AbstractControl): ValidationErrors | null {
-      if (!control.value || !control.value.length) {
+      const { value } = control;
+      if (!value || !value.length) {
          return {
             duration: {
                valid: false
@@ -45,7 +46,7 @@ export class AuthorsComponent implements OnInit, ControlValueAccessor {
    }
 
    writeValue(authors: AuthorRaw[]) {
-      if (authors === null) {
+      if (!authors) {
          this.authors = [];
       } else {
          const processedAuthors = authors.map(author => `${author.firstName} ${author.lastName}`);

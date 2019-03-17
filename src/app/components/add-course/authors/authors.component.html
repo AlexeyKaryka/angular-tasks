@@ -9,12 +9,12 @@
    <datalist id="authorsFromServerList">
       <option *ngFor="let author of authorsFromServer" value="{{author}}">
    </datalist>
-   <div class="authorsTagsContainer">
-      <div class="authorTag" *ngFor="let author of authors">
+   <ul class="authorsTagsContainer">
+      <li class="authorTag" *ngFor="let author of authors">
          {{author}}
          <img (click)="removeAuthor(author)" class="cross" src="assets/cross.png"/>
-      </div>
-   </div>
+      </li>
+   </ul>
 </div>
 
 
